@@ -13,4 +13,7 @@
 <div *ngIf="!$isLoading() && !$error() && $users().length > 0" class="users-info">
   <p>Loaded {{ $users().length }} users successfully!</p>
   <p>First user: {{ $users()[0].name }}</p>
+  <button (click)="deleteUser($users()[0].id)" class="delete-btn">
+    Delete First User
+  </button>
 </div>
