@@ -1,0 +1,19 @@
+<div class="users-container">
+  <h2>Users Management</h2>
+
+  <div *ngIf="$isLoading()" class="loading">
+    Loading users...
+  </div>
+
+  <div *ngIf="$error()" class="error">
+    {{ $error() }}
+  </div>
+
+  <div *ngIf="!$isLoading() && !$error() && $users().length > 0" class="users-info">
+    <p>Loaded {{ $users().length }} users successfully!</p>
+    <p>First user: {{ $users()[0].name }}</p>
+    <button (click)="deleteUser($users()[0].id)" class="delete-btn">
+      Delete First User
+    </button>
+  </div>
+</div>
