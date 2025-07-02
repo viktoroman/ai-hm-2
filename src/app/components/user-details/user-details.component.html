@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>
+  User Details
+</h2>
+<mat-dialog-content class="user-details-content">
+  <div class="user-details-section">
+    <div class="user-details-label">Name:</div>
+    <div class="user-details-value">{{ user.name }}</div>
+  </div>
+  <div class="user-details-section">
+    <div class="user-details-label">Username:</div>
+    <div class="user-details-value">{{ user.username }}</div>
+  </div>
+  <div class="user-details-section">
+    <div class="user-details-label">Email:</div>
+    <div class="user-details-value">{{ user.email }}</div>
+  </div>
+  <div class="user-details-section">
+    <div class="user-details-label">Phone:</div>
+    <div class="user-details-value">{{ user.phone }}</div>
+  </div>
+  <div class="user-details-section">
+    <div class="user-details-label">Website:</div>
+    <div class="user-details-value"><a [href]="'http://' + user.website" target="_blank" rel="noopener">{{ user.website }}</a></div>
+  </div>
+  <div class="user-details-section">
+    <div class="user-details-label">Address:</div>
+    <div class="user-details-value">
+      {{ user.address.street }}, {{ user.address.suite }},<br>
+      {{ user.address.city }}, {{ user.address.zipcode }}
+    </div>
+  </div>
+  <div class="user-details-section">
+    <div class="user-details-label">Company:</div>
+    <div class="user-details-value">
+      <div>{{ user.company.name }}</div>
+      <div class="user-details-company-catchphrase">{{ user.company.catchPhrase }}</div>
+      <div>{{ user.company.bs }}</div>
+    </div>
+  </div>
+  <div class="user-details-section">
+    <div class="user-details-label">Map:</div>
+    <div class="user-details-value">
+      <a [href]="mapUrl" target="_blank" rel="noopener">View on Google Maps</a>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Close</button>
+</mat-dialog-actions>

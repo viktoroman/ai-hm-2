@@ -11,6 +11,7 @@
 
   <app-user-table
     [users]="$users()"
-    (deleteUser)="deleteUser($event)">
+    (deleteUser)="deleteUser($event)"
+    (rowClick)="openUserDetails($event)">
   </app-user-table>
 </div>

@@ -16,6 +16,7 @@ import { User } from '../../contracts';
 export class UserTableComponent {
   $users = input<User[]>([], { alias: 'users' });
   $deleteUser = output<number>({ alias: 'deleteUser' });
+  $rowClick = output<User>({ alias: 'rowClick' });
 
   displayedColumns = ['name', 'address', 'phone', 'website', 'company', 'action'];
 

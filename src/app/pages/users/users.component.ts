@@ -6,6 +6,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { UserTableComponent } from '../../components/user-table/user-table.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ConfirmDialogComponent, ConfirmDialogData } from '../../components/confirm-dialog/confirm-dialog.component';
+import { UserDetailsComponent } from '../../components/user-details/user-details.component';
 
 @Component({
   selector: 'app-users',
@@ -76,6 +77,13 @@ export class UsersComponent implements OnInit {
         this.userDatasource.deleteUser(userId);
         console.log(`User ${userId} deleted from frontend`);
       }
+    });
+  }
+
+  openUserDetails(user: User): void {
+    this.dialog.open(UserDetailsComponent, {
+      data: user,
+      width: '400px',
     });
   }
 }
