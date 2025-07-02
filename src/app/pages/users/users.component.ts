@@ -4,11 +4,13 @@ import { UserDatasourceService } from '../../services/user-datasource.service';
 import { User } from '../../contracts';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { UserTableComponent } from '../../components/user-table/user-table.component';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ConfirmDialogComponent, ConfirmDialogData } from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-users',
   standalone: true,
-  imports: [CommonModule, UserTableComponent],
+  imports: [CommonModule, UserTableComponent, MatDialogModule],
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -16,6 +18,7 @@ import { UserTableComponent } from '../../components/user-table/user-table.compo
 export class UsersComponent implements OnInit {
   private readonly userDatasource = inject(UserDatasourceService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly dialog = inject(MatDialog);
 
   $users = signal<User[]>([]);
   $isLoading = signal(false);
@@ -60,7 +63,19 @@ export class UsersComponent implements OnInit {
    * @param userId - ID of the user to delete
    */
   deleteUser(userId: number): void {
-    this.userDatasource.deleteUser(userId);
-    console.log(`User ${userId} deleted from frontend`);
+    const dialogRef = this.dialog.open<ConfirmDialogComponent, ConfirmDialogData, boolean>(ConfirmDialogComponent, {
+      data: {
+        title: 'Delete User',
+        message: 'Are you sure you want to delete this user?',
+        confirmText: 'Delete',
+        cancelText: 'Cancel',
+      },
+    });
+    dialogRef.afterClosed().subscribe(confirmed => {
+      if (confirmed) {
+        this.userDatasource.deleteUser(userId);
+        console.log(`User ${userId} deleted from frontend`);
+      }
+    });
   }
 }
