@@ -4,7 +4,10 @@ module.exports = {
   testEnvironment: 'jsdom',
   moduleFileExtensions: ['ts', 'html', 'js', 'json'],
   transform: {
-    '^.+\\.(ts|js|html)$': 'ts-jest',
+    '^.+\\.(ts|js|html)$': ['ts-jest', {
+      tsconfig: '<rootDir>/tsconfig.spec.json',
+      stringifyContentPathRegex: '\\.html$',
+    }],
   },
   testMatch: ['**/+(*.)+(spec).+(ts)'],
   collectCoverage: true,
